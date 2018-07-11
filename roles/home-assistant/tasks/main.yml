@@ -1,0 +1,47 @@
+- name: Update packages
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: Install packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+  - python3
+  - python3-venv
+  - python3-pip
+
+- name : Create user
+  user:
+    name: homeassistant
+    create_home: true
+    append: true
+    groups: dialout,gpio
+    system: true
+
+- name: Create directory
+  file:
+    dest: /srv/homeassistant
+    state: directory
+    group: homeassistant
+    owner: homeassistant
+
+- name: Install home-assistant
+  become: true
+  become_user: homeassistant
+  pip:
+    name: homeassistant
+    version: 0.69.1
+    virtualenv: /srv/homeassistant
+    virtualenv_command: /usr/bin/python3 -m venv
+  notify:
+  - restart home-assistant
+
+- name: Install service
+  copy:
+    src: files/service
+    dest: /etc/systemd/system/home-assistant@homeassistant.service
+  notify:
+  - restart home-assistant
+

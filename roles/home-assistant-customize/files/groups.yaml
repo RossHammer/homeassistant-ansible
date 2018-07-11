@@ -1,0 +1,6 @@
+System status:
+- sensor.latest_version
+- sensor.installed_version
+- sensor.ssl_certificate_expiry
+- automation.update_check
+- sensor.uptime

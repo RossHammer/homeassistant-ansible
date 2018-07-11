@@ -1,0 +1,13 @@
+- alias: Update Check
+  trigger:
+  - platform: event
+    event_type: 'state_changed'
+    event_data:
+      entity_id: sensor.latest_version
+  condition:
+  - condition: template
+    value_template: '{{ states.sensor.latest_version.state != states.sensor.installed_version.state }}'
+  action:
+  - service: notify.notify
+    data:
+      message: 'Update available v{{ states.sensor.latest_version.state }} (Currently v{{ states.sensor.installed_version.state }})'

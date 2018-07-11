@@ -1,0 +1,4 @@
+sensor.latest_version:
+  icon: mdi:cloud-upload
+sensor.installed_version:
+  icon: mdi:cloud

@@ -1,4 +1,4 @@
 - hosts: home-assistant
   roles:
   - ssh
-  - home-assistant
+  - home-assistant-customize

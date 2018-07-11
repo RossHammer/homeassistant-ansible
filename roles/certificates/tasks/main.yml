@@ -1,0 +1,19 @@
+- name: Update git
+  apt:
+    pkg: git
+    state: latest
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: Create certificates
+  include_role:
+    name: geerlingguy.certbot
+  vars:
+    certbot_admin_email: glitch17@gmail.com
+    certbot_create_if_missing: true
+    certbot_create_standalone_stop_services:
+    - nginx
+    certbot_certs:
+    - domains:
+      - rosshammer.com
+    certbot_install_from_source: true

@@ -1,6 +1,6 @@
 - name: Update packages
   apt:
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 86400
 
 - name: Install packages
@@ -45,3 +45,9 @@
   notify:
   - restart home-assistant
 
+- name: Update nginx
+  copy:
+    src: files/nginx.config
+    dest: /etc/nginx/sites-enabled/rosshammer.com
+  notify:
+  - restart nginx

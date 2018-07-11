@@ -32,7 +32,7 @@
   become_user: homeassistant
   pip:
     name: homeassistant
-    version: 0.69.1
+    version: "{{ homeassistant_version }}"
     virtualenv: /srv/homeassistant
     virtualenv_command: /usr/bin/python3 -m venv
   notify:

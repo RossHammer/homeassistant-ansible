@@ -5,16 +5,24 @@
   with_items:
   - jq
 
+- name: Create config directory
+  file:
+    path: /home/homeassistant/.homeassistant
+    state: directory
+    group: homeassistant
+    owner: homeassistant
+
 - name: Copy plaintext configs
   copy:
     src: "files/{{ item }}"
     dest: "/home/homeassistant/.homeassistant/{{ item }}"
+    group: homeassistant
+    owner: homeassistant
   with_items:
   - automations.yaml
   - configuration.yaml
   - customize.yaml
   - groups.yaml
-  - known_devices.yaml
   - scripts.yaml
   notify:
   - restart home-assistant
@@ -23,6 +31,8 @@
   template:
     src: templates/secrets.yaml.j2
     dest: /home/homeassistant/.homeassistant/secrets.yaml
+    group: homeassistant
+    owner: homeassistant
   notify:
   - restart home-assistant
 

@@ -6,8 +6,6 @@ homeassistant:
   unit_system: metric
   time_zone: America/Edmonton
   customize: !include customize.yaml
-  whitelist_external_dirs:
-  - /home/homeassistant
 
 http:
   api_password: !secret password
@@ -19,8 +17,8 @@ http:
 
 frontend:
 config:
-#mqtt:
-#  broker: 127.0.0.1
+mqtt:
+ broker: 127.0.0.1
 # logger:
 #   default: debug
 updater:
@@ -53,8 +51,8 @@ sensor:
   command: curl https://pypi.org/pypi/homeassistant/json | jq -r '.info.version'
   name: Latest Version
   scan_interval: 21600
-- platform: file
-  file_path: /home/homeassistant/.homeassistant/.HA_VERSION
+- platform: command_line
+  command: cat /home/homeassistant/.homeassistant/.HA_VERSION
   name: Installed version
 - platform: uptime
 

@@ -1,4 +1,5 @@
 - hosts: home-assistant
   roles:
   - ssh
+  - mqtt
   - home-assistant-customize

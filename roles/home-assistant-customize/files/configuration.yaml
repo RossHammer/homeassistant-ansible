@@ -35,6 +35,9 @@ notify:
   api_key: !secret pushbullet_api
 tts:
 - platform: google
+neato:
+  username: glitch17@gmail.com
+  password: !secret neato_password
 
 zone:
 - name: Work

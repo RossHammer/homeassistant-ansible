@@ -47,6 +47,14 @@ zone:
 
 sensor:
 - platform: yr
+  monitored_conditions:
+  - temperature
+  - symbol
+  - precipitation
+  - windSpeed
+  - pressure
+  - humidity
+  - cloudiness
 - platform: cert_expiry
   host: rosshammer.com
 

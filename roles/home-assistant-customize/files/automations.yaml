@@ -12,3 +12,15 @@
   - service: notify.notify
     data:
       message: 'Update available v{{ states.sensor.latest_version.state }} (Currently v{{ states.sensor.installed_version.state }})'
+- id: 69628ECA-3EBD-4271-A22B-AB71BAC46AC3
+  alias: Run vacuum
+  trigger:
+    platform: time
+    at: '12:30:00'
+  action:
+  - service: vacuum.turn_on
+    data:
+      entity_id: vacuum.neato
+  - service: automation.turn_off
+    data:
+      entity_id: automation.run_vacuum

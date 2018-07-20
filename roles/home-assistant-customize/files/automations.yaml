@@ -1,4 +1,5 @@
-- alias: Update Check
+- id: 452D43CE-FE81-4609-87A9-E6DE387A9461
+  alias: Update Check
   trigger:
   - platform: event
     event_type: 'state_changed'

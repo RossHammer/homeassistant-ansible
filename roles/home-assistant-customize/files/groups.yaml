@@ -1,3 +1,7 @@
+Lights:
+- switch.kitchen_light
+- switch.dining_room_light
+- switch.entrance_light
 Vaccum:
   control: hidden
   entities:

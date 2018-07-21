@@ -73,6 +73,15 @@ binary_sensor:
   state_topic: "esp/state"
 
 switch:
+- platform: tplink
+  name: Dining room light
+  host: 192.168.1.39
+- platform: tplink
+  name: Kitchen light
+  host: 192.168.1.84
+- platform: tplink
+  name: Entrance light
+  host: 192.168.1.203
 - platform: mqtt
   name: "Test Switch"
   command_topic: "test/command"

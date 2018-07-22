@@ -18,9 +18,21 @@
     platform: time
     at: '12:30:00'
   action:
-  - service: vacuum.turn_on
+  - service: homeassistant.turn_on
     data:
       entity_id: vacuum.neato
-  - service: automation.turn_off
+  - service: homeassistant.turn_off
     data:
       entity_id: automation.run_vacuum
+- id: C0A1BFCB-FC00-451D-92C9-947AB00668FC
+  alias: Turn off entrance light
+  trigger:
+    platform: state
+    entity_id: switch.entrance_light
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: homeassistant.turn_off
+    data:
+      entity_id: switch.entrance_light

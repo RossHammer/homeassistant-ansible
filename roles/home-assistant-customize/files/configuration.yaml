@@ -69,11 +69,6 @@ sensor:
   name: Installed version
 - platform: uptime
 
-binary_sensor:
-- platform: mqtt
-  name: esp test
-  state_topic: "esp/state"
-
 switch:
 - platform: tplink
   name: Dining room light
@@ -84,10 +79,6 @@ switch:
 - platform: tplink
   name: Entrance light
   host: 192.168.1.203
-- platform: mqtt
-  name: "Test Switch"
-  command_topic: "test/command"
-  state_topic: "test/state"
 
 group: !include groups.yaml
 automation: !include automations.yaml

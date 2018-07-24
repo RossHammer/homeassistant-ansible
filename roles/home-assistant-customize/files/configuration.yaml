@@ -6,6 +6,10 @@ homeassistant:
   unit_system: metric
   time_zone: America/Edmonton
   customize: !include customize.yaml
+  customize_glob:
+    'group.all_*':
+      hidden: false
+      control: hidden
 
 http:
   api_password: !secret password

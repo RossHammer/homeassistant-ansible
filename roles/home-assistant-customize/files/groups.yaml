@@ -1,16 +1,52 @@
-Lights:
-- switch.kitchen_light
-- switch.dining_room_light
-- switch.entrance_light
-Vaccum:
+# Views
+default_view:
+  name: Rooms
+  view: true
+  entities:
+  - group.lights
+  - group.vacuum
+  - camera.neato_cleaning_map
+Types:
+  view: true
+  entities:
+  - group.lights
+  - group.system_status
+Everything:
+  view: true
+  entities:
+  - group.all_automations
+  - group.all_devices
+  - group.all_sensors
+  - group.all_switches
+  - group.all_vacuum_cleaners
+
+Vacuum:
   control: hidden
   entities:
   - automation.run_vacuum
   - vacuum.neato
-  - switch.neato_schedule
-  - camera.neato_cleaning_map
+Lights:
+- switch.kitchen_light
+- switch.dining_room_light
+- switch.entrance_light
 System status:
 - sensor.latest_version
 - sensor.installed_version
 - sensor.ssl_certificate_expiry
 - sensor.uptime
+
+# Missing all groups
+all_sensors:
+  name: all sensors
+  entities:
+  - sensor.installed_version
+  - sensor.latest_version
+  - sensor.ssl_certificate_expiry
+  - sensor.uptime
+  - sensor.yr_cloudiness
+  - sensor.yr_humidity
+  - sensor.yr_precipitation
+  - sensor.yr_pressure
+  - sensor.yr_symbol
+  - sensor.yr_temperature
+  - sensor.yr_wind_speed

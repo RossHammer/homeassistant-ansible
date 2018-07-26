@@ -21,7 +21,7 @@
     group: homeassistant
     owner: homeassistant
   with_fileglob:
-  - 'files/*.yaml'
+  - 'files/config/*.yaml'
   notify:
   - restart home-assistant
 

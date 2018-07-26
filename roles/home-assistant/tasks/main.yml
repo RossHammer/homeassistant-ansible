@@ -51,3 +51,5 @@
     dest: /etc/nginx/sites-enabled/rosshammer.com
   notify:
   - restart nginx
+
+- import_tasks: config.yml

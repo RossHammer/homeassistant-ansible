@@ -2,4 +2,4 @@
   roles:
   - ssh
   - mqtt
-  - home-assistant-customize
+  - home-assistant

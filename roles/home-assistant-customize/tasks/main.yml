@@ -2,6 +2,8 @@
   apt:
     pkg: "{{ item }}"
     state: latest
+    update_cache: true
+    cache_valid_time: 86400
   with_items:
   - jq
 
@@ -14,16 +16,12 @@
 
 - name: Copy plaintext configs
   copy:
-    src: "files/{{ item }}"
-    dest: "/home/homeassistant/.homeassistant/{{ item }}"
+    src: "{{ item }}"
+    dest: "/home/homeassistant/.homeassistant/"
     group: homeassistant
     owner: homeassistant
-  with_items:
-  - automations.yaml
-  - configuration.yaml
-  - customize.yaml
-  - groups.yaml
-  - scripts.yaml
+  with_fileglob:
+  - 'files/*.yaml'
   notify:
   - restart home-assistant
 

@@ -1,0 +1,4 @@
+homeassistant_config_dir: /home/homeassistant/.homeassistant
+homeassistant_install_dir: /srv/homeassistant
+homeassistant_user: homeassistant
+homeassistant_group: homeassistant

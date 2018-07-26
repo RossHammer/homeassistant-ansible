@@ -1,9 +1,6 @@
 - name: Update git
   apt:
     pkg: git
-    state: latest
-    update_cache: true
-    cache_valid_time: 86400
 
 - name: Create certificates
   include_role:

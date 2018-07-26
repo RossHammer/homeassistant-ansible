@@ -68,8 +68,7 @@ sensor:
   command: curl https://pypi.org/pypi/homeassistant/json | jq -r '.info.version'
   name: Latest Version
   scan_interval: 3600
-- platform: command_line
-  command: cat /home/homeassistant/.homeassistant/.HA_VERSION
+- platform: version
   name: Installed version
 - platform: uptime
 

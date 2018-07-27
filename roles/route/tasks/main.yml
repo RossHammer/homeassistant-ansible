@@ -1,0 +1,18 @@
+- name: Install jq
+  apt:
+    pkg: jq
+
+- set_fact:
+    access_key_id: "{{ hostvars['localhost']['aws']['outputs']['access_key_id']['value'] }}"
+    secret_access_key: "{{ hostvars['localhost']['aws']['outputs']['secret_access_key']['value'] }}"
+
+- name: Install update script cron
+  template:
+    src: update-route.sh.j2
+    dest: /etc/cron.hourly/update-route
+    mode: '700'
+
+- name: Update route
+  shell: /etc/cron.hourly/update-route
+  register: update_result
+  changed_when: "'Updating zones' in update_result.stdout"

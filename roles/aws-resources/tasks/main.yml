@@ -1,0 +1,5 @@
+- name: Apply terraform
+  terraform:
+    force_init: true
+    project_path: "{{ playbook_dir }}/terraform"
+  register: aws

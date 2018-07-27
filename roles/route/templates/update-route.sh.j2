@@ -1,0 +1,40 @@
+#!/bin/bash
+set -euf -o pipefail
+
+export AWS_ACCESS_KEY_ID="{{ access_key_id }}"
+export AWS_SECRET_ACCESS_KEY="{{ secret_access_key }}"
+
+ZONE_ID=ZB1GFAQUK0XOB
+ROUTES='["rosshammer.com.", "*.rosshammer.com."]'
+IP=$(curl -fsS ifconfig.co)
+
+UPDATE=$(aws route53 list-resource-record-sets --hosted-zone-id "$ZONE_ID" | \
+jq -r --arg ip "$IP" --argjson routes "$ROUTES" '
+    .ResourceRecordSets[] | select(
+        .Type == "A"
+            and ([ .Name | gsub("\\\\052"; "*") ] | inside($routes))
+            and .ResourceRecords[0].Value != $ip
+    ) | .Name
+')
+
+if [ -z "$UPDATE" ]; then
+    exit 0
+fi
+
+echo "Updating zones"
+echo "$UPDATE"
+CHANGE=$(jq -nc --arg ip "$IP" --argjson routes "$ROUTES" '
+{
+    Changes: $routes | map({
+        Action: "UPSERT",
+        ResourceRecordSet: {
+            Name: .,
+            Type: "A",
+            TTL: 300,
+            ResourceRecords: [ { Value: $ip }]
+        }
+    })
+}
+')
+aws route53 change-resource-record-sets --hosted-zone-id "$ZONE_ID" --change-batch "$CHANGE"
+

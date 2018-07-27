@@ -34,7 +34,7 @@
 
 - name: Install service
   template:
-    src: service
+    src: service.j2
     dest: /etc/systemd/system/home-assistant@{{ homeassistant_user }}.service
   notify:
   - restart home-assistant

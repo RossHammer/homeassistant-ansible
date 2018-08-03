@@ -1,0 +1,8 @@
+#!/bin/bash
+die() { echo "$*" 1>&2 ; exit 1; }
+TOPIC=$1
+[ -n "$TOPIC" ] || die "topic not provided"
+set -euf -o pipefail
+
+mosquitto_pub -t "cmnd/$TOPIC/PowerRetain" -m 1 -q 1
+mosquitto_pub -t "cmnd/$TOPIC/LedState" -m 0 -q 1

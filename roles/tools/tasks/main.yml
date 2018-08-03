@@ -1,0 +1,14 @@
+- name: Install packages
+  apt:
+    pkg: "{{ item }}"
+  with_items:
+  - vim
+  - mosquitto-clients
+
+- name: Install scripts
+  template:
+    src: "{{ item }}"
+    dest: /usr/local/bin/
+    mode: '755'
+  with_fileglob:
+  - 'templates/*'

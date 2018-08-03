@@ -82,6 +82,17 @@ switch:
 - platform: tplink
   name: Entrance light
   host: 192.168.1.203
+- platform: mqtt
+  name: Desk light
+  state_topic: stat/desk_light/POWER
+  command_topic: cmnd/desk_light/POWER
+  availability_topic: tele/desk_light/LWT
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: Online
+  payload_not_available: Offline
+  retain: false
 
 group: !include groups.yaml
 automation: !include automations.yaml

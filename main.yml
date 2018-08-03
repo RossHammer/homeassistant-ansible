@@ -10,5 +10,6 @@
       state: latest
   roles:
   - ssh
+  - tools
   - mqtt
   - home-assistant

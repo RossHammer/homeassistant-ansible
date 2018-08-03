@@ -1,5 +1,24 @@
+- name: Make temp dir
+  file:
+    path: "{{ playbook_dir }}/tmp"
+    state: directory
+
+- name: Download terraform
+  get_url:
+    url: "https://releases.hashicorp.com/terraform/{{ terraform_version}}/terraform_{{ terraform_version }}_{{ ansible_system | lower }}_amd64.zip"
+    dest: "{{ playbook_dir }}/tmp/terraform_{{ terraform_version }}.zip"
+
+- name: Extract terraform
+  unarchive:
+    src: "{{ playbook_dir }}/tmp/terraform_{{ terraform_version }}.zip"
+    dest: "{{ playbook_dir }}/tmp"
+
 - name: Apply terraform
   terraform:
     force_init: true
     project_path: "{{ playbook_dir }}/terraform"
+    binary_path: "{{ playbook_dir }}/tmp/terraform"
+  environment:
+    AWS_ACCESS_KEY: "{{ aws_access_key }}"
+    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"
   register: aws

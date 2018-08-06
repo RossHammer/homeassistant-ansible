@@ -1,8 +1,6 @@
 automation.run_vacuum:
   icon: mdi:history
   initial_state: 'off'
-automation.update_check:
-  hidden: true
 
 sensor.installed_version:
   icon: mdi:cloud

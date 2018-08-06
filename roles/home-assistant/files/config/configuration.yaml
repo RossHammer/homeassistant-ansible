@@ -44,6 +44,26 @@ tts:
 neato:
   username: glitch17@gmail.com
   password: !secret neato_password
+google_assistant:
+  project_id: home-assistant-68df3
+  client_id: T7vumRwwAapOeyuGiPyz1mAJvzRJ8Dkif1l0Yh5DEv3pnxnFCeuW2e6QMgD9lAYCMW0jvV2Cg
+  access_token: 5mmhybdAyBOsreLSNduw06Rk0zVWzb7LSWADwcpNswrrg0qqJ2j072fBvV1BljWqhLftAofq2jORFqaq
+  api_key: AIzaSyCKZokgAcLanx0cVbrSbSAKP0dAdl6NzPg
+  expose_by_default: false
+  entity_config:
+    switch.kitchen_light:
+      expose: true
+    switch.dining_room_light:
+      expose: true
+    switch.desk_light:
+      expose: true
+    switch.entrance_light:
+      expose: true
+    automation.run_vacuum:
+      expose: true
+    vacuum.neato:
+      expose: true
+
 
 zone:
 - name: Work

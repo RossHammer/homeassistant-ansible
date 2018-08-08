@@ -51,20 +51,18 @@ google_assistant:
   api_key: AIzaSyCKZokgAcLanx0cVbrSbSAKP0dAdl6NzPg
   expose_by_default: false
   entity_config:
-    switch.kitchen_light:
+    switch.desk_light:
       expose: true
     switch.dining_room_light:
       expose: true
-    switch.desk_light:
-      expose: true
     switch.entrance_light:
       expose: true
-    automation.run_vacuum:
+    switch.kitchen_light:
       expose: true
-    vacuum.neato:
+    switch.living_room_light_east:
       expose: true
-
-
+    switch.living_room_light_west:
+      expose: true
 zone:
 - name: Work
   latitude: !secret work_location_latitude
@@ -107,6 +105,28 @@ switch:
   state_topic: stat/desk_light/POWER
   command_topic: cmnd/desk_light/POWER
   availability_topic: tele/desk_light/LWT
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: Online
+  payload_not_available: Offline
+  retain: false
+- platform: mqtt
+  name: Living room light east
+  state_topic: stat/living_room_light_east/POWER
+  command_topic: cmnd/living_room_light_east/POWER
+  availability_topic: tele/living_room_light_east/LWT
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: Online
+  payload_not_available: Offline
+  retain: false
+- platform: mqtt
+  name: Living room light west
+  state_topic: stat/living_room_light_west/POWER
+  command_topic: cmnd/living_room_light_west/POWER
+  availability_topic: tele/living_room_light_west/LWT
   qos: 1
   payload_on: "ON"
   payload_off: "OFF"

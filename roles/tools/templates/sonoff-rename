@@ -1,0 +1,9 @@
+#!/bin/bash
+die() { echo "$*" 1>&2 ; exit 1; }
+NEW_NAME=$1
+OLD_NAME=$2
+[ -n "$OLD_NAME" ] || OLD_NAME=sonoff
+[ -n "$NEW_NAME" ] || die "new name not provided"
+set -euf -o pipefail
+
+mosquitto_pub -t "cmnd/$OLD_NAME/Topic" -m "$NEW_NAME" -q 1

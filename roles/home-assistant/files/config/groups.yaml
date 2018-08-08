@@ -28,6 +28,8 @@ Vacuum:
 Lights:
 - switch.kitchen_light
 - switch.dining_room_light
+- switch.living_room_light_east
+- switch.living_room_light_west
 - switch.desk_light
 - switch.entrance_light
 System status:

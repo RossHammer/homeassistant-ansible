@@ -28,6 +28,7 @@
     dest: "{{ homeassistant_config_dir }}/secrets.yaml"
     group: "{{ homeassistant_group }}"
     owner: "{{ homeassistant_user }}"
+    mode: "400"
   notify:
   - restart home-assistant
 

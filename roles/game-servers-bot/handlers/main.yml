@@ -1,0 +1,6 @@
+- name: restart game-servers-bot
+  systemd:
+    name: game-servers-bot@{{ game_servers_bot_user }}
+    state: restarted
+    enabled: true
+    daemon_reload: true

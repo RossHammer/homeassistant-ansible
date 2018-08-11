@@ -1,6 +1,6 @@
 - name: restart home-assistant
   systemd:
-    name: home-assistant@homeassistant
+    name: home-assistant@{{ homeassistant_user }}
     state: restarted
     enabled: true
     daemon_reload: true

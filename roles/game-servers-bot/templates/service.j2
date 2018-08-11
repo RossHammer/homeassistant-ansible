@@ -1,0 +1,13 @@
+[Unit]
+Description=Game server bot
+After=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile={{ game_servers_bot_install_dir }}/env
+ExecStart=/usr/local/bin/npm start
+WorkingDirectory={{ game_servers_bot_install_dir }}/repo/discord-bot
+User=%i
+
+[Install]
+WantedBy=multi-user.target

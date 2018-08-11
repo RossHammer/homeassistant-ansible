@@ -3,8 +3,8 @@
     pkg: jq
 
 - set_fact:
-    access_key_id: "{{ hostvars['localhost']['aws']['outputs']['access_key_id']['value'] }}"
-    secret_access_key: "{{ hostvars['localhost']['aws']['outputs']['secret_access_key']['value'] }}"
+    access_key_id: "{{ hostvars['localhost']['aws']['outputs']['route_access_key_id']['value'] }}"
+    secret_access_key: "{{ hostvars['localhost']['aws']['outputs']['route_secret_access_key']['value'] }}"
 
 - name: Install update script cron
   template:

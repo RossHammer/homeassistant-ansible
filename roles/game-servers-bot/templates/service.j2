@@ -8,6 +8,8 @@ EnvironmentFile={{ game_servers_bot_install_dir }}/env
 ExecStart=/usr/local/bin/npm start
 WorkingDirectory={{ game_servers_bot_install_dir }}/repo/discord-bot
 User=%i
+Restart=on-failure
+RestartSec=1m
 
 [Install]
 WantedBy=multi-user.target

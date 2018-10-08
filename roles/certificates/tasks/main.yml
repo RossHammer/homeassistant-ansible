@@ -14,3 +14,11 @@
     - domains:
       - rosshammer.com
     certbot_install_from_source: true
+    certbot_auto_renew: False
+
+- name: Add cron job for certbot renewal
+  cron:
+      name: Certbot automatic renewal.
+      job: "service nginx stop && {{ certbot_script }} renew --quiet --no-self-upgrade; service nginx start"
+      minute: 20
+      hour: 3

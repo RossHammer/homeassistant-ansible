@@ -12,7 +12,6 @@ homeassistant:
       control: hidden
 
 http:
-  api_password: !secret password
   trusted_networks:
   - 127.0.0.1
   - 192.168.1.0/24
@@ -46,8 +45,6 @@ neato:
   password: !secret neato_password
 google_assistant:
   project_id: home-assistant-68df3
-  client_id: T7vumRwwAapOeyuGiPyz1mAJvzRJ8Dkif1l0Yh5DEv3pnxnFCeuW2e6QMgD9lAYCMW0jvV2Cg
-  access_token: 5mmhybdAyBOsreLSNduw06Rk0zVWzb7LSWADwcpNswrrg0qqJ2j072fBvV1BljWqhLftAofq2jORFqaq
   api_key: AIzaSyCKZokgAcLanx0cVbrSbSAKP0dAdl6NzPg
   expose_by_default: false
   entity_config:

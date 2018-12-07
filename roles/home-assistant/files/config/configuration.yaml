@@ -33,8 +33,9 @@ history:
 logbook:
 sun:
 map:
+owntracks:
+  webhook_id: !secret owntracks_webhook_id
 device_tracker:
-- platform: owntracks_http
 notify:
 - platform: pushbullet
   api_key: !secret pushbullet_api

@@ -15,8 +15,13 @@
 - id: 69628ECA-3EBD-4271-A22B-AB71BAC46AC3
   alias: Run vacuum
   trigger:
-    platform: time
-    at: '12:30:00'
+    platform: state
+    entity_id: device_tracker.ross_ross
+    to: work
+  condition:
+    condition: state
+    entity_id: vacuum.neato
+    state: docked
   action:
   - service: homeassistant.turn_on
     data:
@@ -24,6 +29,29 @@
   - service: homeassistant.turn_off
     data:
       entity_id: automation.run_vacuum
+- id: 30655BEA-0DFD-4016-9472-E5E571FE0EA6
+  alias: Schedule vacuum
+  trigger:
+    platform: time
+    at: '00:00:00'
+  condition:
+    condition: time
+    weekday:
+    - mon
+  action:
+  - service: homeassistant.turn_on
+    data:
+      entity_id: automation.run_vacuum
+- id: F04F1EDE-74AD-4206-BE58-C5AF6D7E6A07
+  alias: Empty vacuum notification
+  trigger:
+    platform: state
+    entity_id: vacuum.neato
+    from: cleaning
+  action:
+  - service: notify.notify
+    data:
+      message: 'Vacuum finished and is {{ states.vacuum.neato.state }}. Empty the dirt bin.'
 - id: C0A1BFCB-FC00-451D-92C9-947AB00668FC
   alias: Turn off entrance light
   trigger:

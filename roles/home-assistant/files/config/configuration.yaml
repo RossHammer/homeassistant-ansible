@@ -29,6 +29,8 @@ mqtt:
 updater:
 discovery:
 conversation:
+recorder:
+  purge_keep_days: 60
 history:
 logbook:
 sun:

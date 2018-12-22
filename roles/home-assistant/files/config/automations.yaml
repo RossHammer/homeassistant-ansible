@@ -17,13 +17,13 @@
   trigger:
     platform: state
     entity_id: device_tracker.ross_ross
-    to: work
+    to: Work
   condition:
     condition: state
     entity_id: vacuum.neato
     state: docked
   action:
-  - service: homeassistant.turn_on
+  - service: vacuum.start
     data:
       entity_id: vacuum.neato
   - service: homeassistant.turn_off

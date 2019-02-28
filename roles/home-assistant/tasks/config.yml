@@ -1,8 +1,6 @@
 - name: Install packages for config
   apt:
-    pkg: "{{ item }}"
-  with_items:
-  - jq
+    pkg: jq
 
 - name: Create config directory
   file:

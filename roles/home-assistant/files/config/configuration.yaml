@@ -31,6 +31,8 @@ discovery:
 conversation:
 recorder:
   purge_keep_days: 60
+person:
+system_health:
 history:
 logbook:
 sun:
@@ -53,16 +55,25 @@ google_assistant:
   entity_config:
     switch.desk_light:
       expose: true
+      room: Main
     switch.dining_room_light:
       expose: true
-    switch.entrance_light:
-      expose: true
+      room: Main
     switch.kitchen_light:
       expose: true
+      room: Main
     switch.living_room_light_east:
       expose: true
+      room: Main
     switch.living_room_light_west:
       expose: true
+      room: Main
+    switch.entrance_light:
+      expose: true
+      room: Entryway
+    vacuum.neato:
+      expose: true
+      room: Bedroom
 zone:
 - name: Work
   latitude: !secret work_location_latitude

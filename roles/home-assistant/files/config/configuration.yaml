@@ -71,6 +71,9 @@ google_assistant:
     switch.entrance_light:
       expose: true
       room: Entryway
+    switch.bedroom_light:
+      expose: true
+      room: Bedroom
     vacuum.neato:
       expose: true
       room: Bedroom

@@ -31,6 +31,7 @@ Lights:
 - switch.living_room_light_north
 - switch.living_room_light_south
 - switch.desk_light
+- switch.bedroom_light
 - switch.entrance_light
 System status:
 - sensor.latest_version

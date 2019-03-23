@@ -27,7 +27,7 @@ mqtt:
 # logger:
 #   default: debug
 updater:
-discovery:
+# discovery:
 conversation:
 recorder:
   purge_keep_days: 60
@@ -62,10 +62,10 @@ google_assistant:
     switch.kitchen_light:
       expose: true
       room: Main
-    switch.living_room_light_east:
+    switch.living_room_light_south:
       expose: true
       room: Main
-    switch.living_room_light_west:
+    switch.living_room_light_north:
       expose: true
       room: Main
     switch.entrance_light:
@@ -78,6 +78,7 @@ zone:
 - name: Work
   latitude: !secret work_location_latitude
   longitude: !secret work_location_longitude
+  radius: 200
   icon: mdi:domain
 
 sensor:
@@ -101,16 +102,9 @@ sensor:
   name: Installed version
 - platform: uptime
 
+tplink:
+
 switch:
-- platform: tplink
-  name: Dining room light
-  host: 192.168.1.39
-- platform: tplink
-  name: Kitchen light
-  host: 192.168.1.84
-- platform: tplink
-  name: Entrance light
-  host: 192.168.1.203
 - platform: mqtt
   name: Desk light
   state_topic: stat/desk_light/POWER
@@ -123,10 +117,10 @@ switch:
   payload_not_available: Offline
   retain: false
 - platform: mqtt
-  name: Living room light east
-  state_topic: stat/living_room_light_east/POWER
-  command_topic: cmnd/living_room_light_east/POWER
-  availability_topic: tele/living_room_light_east/LWT
+  name: Living room light south
+  state_topic: stat/living_room_light_south/POWER
+  command_topic: cmnd/living_room_light_south/POWER
+  availability_topic: tele/living_room_light_south/LWT
   qos: 1
   payload_on: "ON"
   payload_off: "OFF"
@@ -134,10 +128,10 @@ switch:
   payload_not_available: Offline
   retain: false
 - platform: mqtt
-  name: Living room light west
-  state_topic: stat/living_room_light_west/POWER
-  command_topic: cmnd/living_room_light_west/POWER
-  availability_topic: tele/living_room_light_west/LWT
+  name: Living room light north
+  state_topic: stat/living_room_light_north/POWER
+  command_topic: cmnd/living_room_light_north/POWER
+  availability_topic: tele/living_room_light_north/LWT
   qos: 1
   payload_on: "ON"
   payload_off: "OFF"

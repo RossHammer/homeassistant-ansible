@@ -10,11 +10,15 @@ homeassistant:
     'group.all_*':
       hidden: false
       control: hidden
+  auth_providers:
+  - type: trusted_networks
+    trusted_networks:
+    - 127.0.0.1
+    - 192.168.1.0/24
+    allow_bypass_login: true
+  - type: homeassistant
 
 http:
-  trusted_networks:
-  - 127.0.0.1
-  - 192.168.1.0/24
   base_url: rosshammer.com
   use_x_forwarded_for: true
   trusted_proxies:
@@ -44,7 +48,7 @@ notify:
 - platform: pushbullet
   api_key: !secret pushbullet_api
 tts:
-- platform: google
+- platform: google_translate
 neato:
   username: glitch17@gmail.com
   password: !secret neato_password
@@ -62,10 +66,7 @@ google_assistant:
     switch.kitchen_light:
       expose: true
       room: Main
-    switch.living_room_light_south:
-      expose: true
-      room: Main
-    switch.living_room_light_north:
+    switch.living_room_lights:
       expose: true
       room: Main
     switch.entrance_light:
@@ -120,21 +121,10 @@ switch:
   payload_not_available: Offline
   retain: false
 - platform: mqtt
-  name: Living room light south
-  state_topic: stat/living_room_light_south/POWER
-  command_topic: cmnd/living_room_light_south/POWER
-  availability_topic: tele/living_room_light_south/LWT
-  qos: 1
-  payload_on: "ON"
-  payload_off: "OFF"
-  payload_available: Online
-  payload_not_available: Offline
-  retain: false
-- platform: mqtt
-  name: Living room light north
-  state_topic: stat/living_room_light_north/POWER
-  command_topic: cmnd/living_room_light_north/POWER
-  availability_topic: tele/living_room_light_north/LWT
+  name: Living room lights
+  state_topic: stat/living_room_lights/POWER
+  command_topic: cmnd/living_room_lights/POWER
+  availability_topic: tele/living_room_lights/LWT
   qos: 1
   payload_on: "ON"
   payload_off: "OFF"

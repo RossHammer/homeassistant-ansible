@@ -16,7 +16,7 @@
   alias: Run vacuum
   trigger:
     platform: state
-    entity_id: device_tracker.ross_ross
+    entity_id: person.ross
     to: Work
   condition:
     condition: state

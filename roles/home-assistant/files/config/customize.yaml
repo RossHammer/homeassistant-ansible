@@ -6,3 +6,6 @@ sensor.installed_version:
   icon: mdi:cloud
 sensor.latest_version:
   icon: mdi:cloud-upload
+
+switch.christmas_tree:
+  icon: mdi:pine-tree

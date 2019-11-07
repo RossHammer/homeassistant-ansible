@@ -3,53 +3,64 @@ default_view:
   name: Rooms
   view: true
   entities:
-  - group.lights
-  - group.vacuum
-  - camera.neato_cleaning_map
+    - group.lights
+    - group.automations
+    - group.vacuum
+    - camera.neato_cleaning_map
 Types:
   view: true
   entities:
-  - group.lights
-  - group.system_status
+    - group.lights
+    - group.system_status
 Everything:
   view: true
   entities:
-  - group.all_automations
-  - group.all_devices
-  - group.all_sensors
-  - group.all_switches
-  - group.all_vacuum_cleaners
+    - group.all_automations
+    - group.all_devices
+    - group.all_sensors
+    - group.all_switches
+    - group.all_vacuum_cleaners
 
 Vacuum:
   control: hidden
   entities:
-  - automation.run_vacuum
-  - vacuum.neato
+    - automation.run_vacuum
+    - vacuum.neato
 Lights:
-- switch.kitchen_light
-- switch.dining_room_light
-- switch.living_room_lights
-- switch.desk_light
-- switch.bedroom_light
-- switch.entrance_light
+  - switch.christmas_tree
+  - switch.kitchen_light
+  - switch.dining_room_light
+  - switch.living_room_lights
+  - switch.desk_light
+  - switch.bedroom_light
+  - switch.entrance_light
+Automations:
+  control: hidden
+  entities:
+    - automation.run_vacuum
+    - automation.turn_off_entrance_light
+    - automation.welcome_christmas_tree
+    - automation.sunset_christmas_tree
+    - automation.bedtime_christmas_tree
+    - automation.goodbye_christmas_tree
 System status:
-- sensor.latest_version
-- sensor.installed_version
-- sensor.ssl_certificate_expiry
-- sensor.uptime
+  - sensor.latest_version
+  - sensor.installed_version
+  - sensor.ssl_certificate_expiry
+  - sensor.uptime
 
 # Missing all groups
 all_sensors:
   name: all sensors
   entities:
-  - sensor.installed_version
-  - sensor.latest_version
-  - sensor.ssl_certificate_expiry
-  - sensor.uptime
-  - sensor.yr_cloudiness
-  - sensor.yr_humidity
-  - sensor.yr_precipitation
-  - sensor.yr_pressure
-  - sensor.yr_symbol
-  - sensor.yr_temperature
-  - sensor.yr_wind_speed
+    - sensor.installed_version
+    - sensor.latest_version
+    - sensor.ssl_certificate_expiry
+    - sensor.uptime
+    - sensor.yr_cloudiness
+    - sensor.yr_humidity
+    - sensor.yr_precipitation
+    - sensor.yr_pressure
+    - sensor.yr_symbol
+    - sensor.yr_temperature
+    - sensor.yr_wind_speed

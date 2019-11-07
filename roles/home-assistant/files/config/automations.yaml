@@ -1,17 +1,17 @@
 - id: 452D43CE-FE81-4609-87A9-E6DE387A9461
   alias: Update Check
   trigger:
-  - platform: event
-    event_type: 'state_changed'
-    event_data:
-      entity_id: sensor.latest_version
+    - platform: event
+      event_type: 'state_changed'
+      event_data:
+        entity_id: sensor.latest_version
   condition:
-  - condition: template
-    value_template: '{{ states.sensor.latest_version.state != states.sensor.installed_version.state }}'
+    - condition: template
+      value_template: '{{ states.sensor.latest_version.state != states.sensor.installed_version.state }}'
   action:
-  - service: notify.notify
-    data:
-      message: 'Update available v{{ states.sensor.latest_version.state }} (Currently v{{ states.sensor.installed_version.state }})'
+    - service: notify.notify
+      data:
+        message: 'Update available v{{ states.sensor.latest_version.state }} (Currently v{{ states.sensor.installed_version.state }})'
 - id: 69628ECA-3EBD-4271-A22B-AB71BAC46AC3
   alias: Run vacuum
   trigger:
@@ -23,12 +23,12 @@
     entity_id: vacuum.neato
     state: docked
   action:
-  - service: vacuum.start
-    data:
-      entity_id: vacuum.neato
-  - service: homeassistant.turn_off
-    data:
-      entity_id: automation.run_vacuum
+    - service: vacuum.start
+      data:
+        entity_id: vacuum.neato
+    - service: homeassistant.turn_off
+      data:
+        entity_id: automation.run_vacuum
 - id: 30655BEA-0DFD-4016-9472-E5E571FE0EA6
   alias: Schedule vacuum
   trigger:
@@ -37,11 +37,11 @@
   condition:
     condition: time
     weekday:
-    - mon
+      - mon
   action:
-  - service: homeassistant.turn_on
-    data:
-      entity_id: automation.run_vacuum
+    - service: homeassistant.turn_on
+      data:
+        entity_id: automation.run_vacuum
 - id: F04F1EDE-74AD-4206-BE58-C5AF6D7E6A07
   alias: Empty vacuum notification
   trigger:
@@ -49,9 +49,9 @@
     entity_id: vacuum.neato
     from: cleaning
   action:
-  - service: notify.notify
-    data:
-      message: 'Vacuum finished and is {{ states.vacuum.neato.state }}. Empty the dirt bin.'
+    - service: notify.notify
+      data:
+        message: 'Vacuum finished and is {{ states.vacuum.neato.state }}. Empty the dirt bin.'
 - id: C0A1BFCB-FC00-451D-92C9-947AB00668FC
   alias: Turn off entrance light
   trigger:
@@ -61,6 +61,55 @@
     for:
       minutes: 5
   action:
-  - service: homeassistant.turn_off
-    data:
-      entity_id: switch.entrance_light
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.entrance_light
+- id: D9B68172-2FA9-4B48-8B1C-48EAB794A247
+  alias: Bedtime christmas tree
+  trigger:
+    platform: time
+    at: '23:00:00'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.christmas_tree
+- id: 071EFE34-44CD-4FA4-AC57-DFD8E1471C4F
+  alias: Welcome christmas tree
+  trigger:
+    platform: state
+    entity_id: switch.entrance_light
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: time
+      after: '12:00:00'
+      before: '22:30:00'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.christmas_tree
+- id: 68C4BEB7-4D86-437E-9AFF-5A63141523E3
+  alias: Sunset christmas tree
+  trigger:
+    platform: sun
+    event: sunset
+  condition:
+    condition: state
+    entity_id: person.ross
+    state: home
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.christmas_tree
+- id: BFB17693-72C2-43DE-8D51-399F91362B66
+  alias: Goodbye christmas tree
+  trigger:
+    platform: state
+    entity_id: person.ross
+    from: home
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.christmas_tree

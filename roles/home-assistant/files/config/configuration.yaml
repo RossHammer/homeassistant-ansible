@@ -11,23 +11,23 @@ homeassistant:
       hidden: false
       control: hidden
   auth_providers:
-  - type: trusted_networks
-    trusted_networks:
-    - 127.0.0.1
-    - 192.168.1.0/24
-    allow_bypass_login: true
-  - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 127.0.0.1
+        - 192.168.1.0/24
+      allow_bypass_login: true
+    - type: homeassistant
 
 http:
   base_url: rosshammer.com
   use_x_forwarded_for: true
   trusted_proxies:
-  - 127.0.0.1
+    - 127.0.0.1
 
 frontend:
 config:
 mqtt:
- broker: 127.0.0.1
+  broker: 127.0.0.1
 # logger:
 #   default: debug
 updater:
@@ -45,10 +45,10 @@ owntracks:
   webhook_id: !secret owntracks_webhook_id
 device_tracker:
 notify:
-- platform: pushbullet
-  api_key: !secret pushbullet_api
+  - platform: pushbullet
+    api_key: !secret pushbullet_api
 tts:
-- platform: google_translate
+  - platform: google_translate
 neato:
   username: glitch17@gmail.com
   password: !secret neato_password
@@ -75,62 +75,72 @@ google_assistant:
     switch.bedroom_light:
       expose: true
       room: Bedroom
-    vacuum.neato:
+    switch.christmas_tree:
       expose: true
-      room: Bedroom
 zone:
-- name: Work
-  latitude: !secret work_location_latitude
-  longitude: !secret work_location_longitude
-  radius: 200
-  icon: mdi:domain
+  - name: Work
+    latitude: !secret work_location_latitude
+    longitude: !secret work_location_longitude
+    radius: 200
+    icon: mdi:domain
 
 sensor:
-- platform: yr
-  monitored_conditions:
-  - temperature
-  - symbol
-  - precipitation
-  - windSpeed
-  - pressure
-  - humidity
-  - cloudiness
-- platform: cert_expiry
-  host: rosshammer.com
+  - platform: yr
+    monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - windSpeed
+      - pressure
+      - humidity
+      - cloudiness
+  - platform: cert_expiry
+    host: rosshammer.com
 
-- platform: command_line
-  command: curl https://pypi.org/pypi/homeassistant/json | jq -r '.info.version'
-  name: Latest Version
-  scan_interval: 3600
-- platform: version
-  name: Installed version
-- platform: uptime
+  - platform: command_line
+    command: curl https://pypi.org/pypi/homeassistant/json | jq -r '.info.version'
+    name: Latest Version
+    scan_interval: 3600
+  - platform: version
+    name: Installed version
+  - platform: uptime
 
 tplink:
 
 switch:
-- platform: mqtt
-  name: Desk light
-  state_topic: stat/desk_light/POWER
-  command_topic: cmnd/desk_light/POWER
-  availability_topic: tele/desk_light/LWT
-  qos: 1
-  payload_on: "ON"
-  payload_off: "OFF"
-  payload_available: Online
-  payload_not_available: Offline
-  retain: false
-- platform: mqtt
-  name: Living room lights
-  state_topic: stat/living_room_lights/POWER
-  command_topic: cmnd/living_room_lights/POWER
-  availability_topic: tele/living_room_lights/LWT
-  qos: 1
-  payload_on: "ON"
-  payload_off: "OFF"
-  payload_available: Online
-  payload_not_available: Offline
-  retain: false
+  - platform: mqtt
+    name: Desk light
+    state_topic: stat/desk_light/POWER
+    command_topic: cmnd/desk_light/POWER
+    availability_topic: tele/desk_light/LWT
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: Online
+    payload_not_available: Offline
+    retain: false
+  - platform: mqtt
+    name: Living room lights
+    state_topic: stat/living_room_lights/POWER
+    command_topic: cmnd/living_room_lights/POWER
+    availability_topic: tele/living_room_lights/LWT
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: Online
+    payload_not_available: Offline
+    retain: false
+  - platform: mqtt
+    name: Christmas tree
+    state_topic: stat/christmas_tree/POWER
+    command_topic: cmnd/christmas_tree/POWER
+    availability_topic: tele/christmas_tree/LWT
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: Online
+    payload_not_available: Offline
+    retain: false
 
 group: !include groups.yaml
 automation: !include automations.yaml

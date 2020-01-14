@@ -14,5 +14,3 @@
 
 - name: Update route
   shell: /etc/cron.hourly/update-route
-  register: update_result
-  changed_when: "'Updating zones' in update_result.stdout"

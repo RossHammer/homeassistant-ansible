@@ -5,36 +5,30 @@ export AWS_ACCESS_KEY_ID="{{ access_key_id }}"
 export AWS_SECRET_ACCESS_KEY="{{ secret_access_key }}"
 
 ZONE_ID=ZB1GFAQUK0XOB
-ROUTES='["rosshammer.com.", "*.rosshammer.com."]'
-IP=$(curl -fsS ifconfig.co)
-
-UPDATE=$(aws route53 list-resource-record-sets --hosted-zone-id "$ZONE_ID" | \
-jq -r --arg ip "$IP" --argjson routes "$ROUTES" '
-    .ResourceRecordSets[] | select(
-        .Type == "A"
-            and ([ .Name | gsub("\\\\052"; "*") ] | inside($routes))
-            and .ResourceRecords[0].Value != $ip
-    ) | .Name
-')
-
-if [ -z "$UPDATE" ]; then
-    exit 0
-fi
+PUBLIC_ROUTES='["rosshammer.com.", "*.rosshammer.com."]'
+PRIVATE_ROUTES='["mqtt.rosshammer.com."]'
+PUBLIC_IP=$(curl -fsS4 ifconfig.co)
+INTERNAL_IP=$(hostname -I | awk '{print $1}')
 
 echo "Updating zones"
-echo "$UPDATE"
-CHANGE=$(jq -nc --arg ip "$IP" --argjson routes "$ROUTES" '
-{
-    Changes: $routes | map({
+CHANGE=$(jq -nc --arg internal_ip "$INTERNAL_IP" --arg public_ip "$PUBLIC_IP" \
+    --argjson private_routes "$PRIVATE_ROUTES" --argjson public_routes "$PUBLIC_ROUTES" '
+def record(ip): {
         Action: "UPSERT",
         ResourceRecordSet: {
             Name: .,
             Type: "A",
             TTL: 300,
-            ResourceRecords: [ { Value: $ip }]
+            ResourceRecords: [ { Value: ip }]
         }
-    })
+    };
+{
+    Changes: (
+        ($public_routes | map(record($public_ip))) +
+        ($private_routes | map(record($internal_ip)))
+    )
 }
 ')
+echo $CHANGE
 aws route53 change-resource-record-sets --hosted-zone-id "$ZONE_ID" --change-batch "$CHANGE"
 

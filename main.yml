@@ -1,15 +1,15 @@
 - hosts: localhost
   any_errors_fatal: true
   roles:
-  - aws-resources
-- hosts: home-assistant
+    - aws-resources
+- hosts: home_assistant
   module_defaults:
     apt:
       update_cache: true
       cache_valid_time: 86400
       state: latest
   roles:
-  - ssh
-  - tools
-  - mqtt
-  - home-assistant
+    - ssh
+    - tools
+    - mqtt
+    - home-assistant

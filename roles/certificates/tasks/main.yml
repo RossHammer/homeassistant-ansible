@@ -9,16 +9,16 @@
     certbot_admin_email: glitch17@gmail.com
     certbot_create_if_missing: true
     certbot_create_standalone_stop_services:
-    - nginx
+      - nginx
     certbot_certs:
-    - domains:
-      - rosshammer.com
+      - domains:
+          - rosshammer.com
     certbot_install_from_source: true
     certbot_auto_renew: False
 
 - name: Add cron job for certbot renewal
   cron:
-      name: Certbot automatic renewal.
-      job: "systemctl stop nginx && {{ certbot_script }} renew --quiet --no-self-upgrade; systemctl start nginx"
-      minute: 20
-      hour: 3
+    name: Certbot automatic renewal.
+    job: 'systemctl stop nginx && {{ certbot_script }} renew --quiet --no-self-upgrade; systemctl start nginx'
+    minute: '20'
+    hour: '3'

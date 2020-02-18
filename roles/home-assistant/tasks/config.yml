@@ -4,34 +4,34 @@
 
 - name: Create config directory
   file:
-    path: "{{ homeassistant_config_dir }}"
+    path: '{{ homeassistant_config_dir }}'
     state: directory
-    group: "{{ homeassistant_group }}"
-    owner: "{{ homeassistant_user }}"
+    group: '{{ homeassistant_group }}'
+    owner: '{{ homeassistant_user }}'
 
 - name: Copy plaintext configs
   copy:
-    src: "{{ item }}"
-    dest: "{{ homeassistant_config_dir }}"
-    group: "{{ homeassistant_group }}"
-    owner: "{{ homeassistant_user }}"
+    src: '{{ item }}'
+    dest: '{{ homeassistant_config_dir }}'
+    group: '{{ homeassistant_group }}'
+    owner: '{{ homeassistant_user }}'
   with_fileglob:
-  - 'files/config/*.yaml'
+    - 'files/config/*.*'
   notify:
-  - restart home-assistant
+    - restart home-assistant
 
 - name: Copy secrets
   template:
     src: templates/secrets.yaml.j2
-    dest: "{{ homeassistant_config_dir }}/secrets.yaml"
-    group: "{{ homeassistant_group }}"
-    owner: "{{ homeassistant_user }}"
-    mode: "400"
+    dest: '{{ homeassistant_config_dir }}/secrets.yaml'
+    group: '{{ homeassistant_group }}'
+    owner: '{{ homeassistant_user }}'
+    mode: '400'
   notify:
-  - restart home-assistant
+    - restart home-assistant
 
 - name: Check config
   become: true
-  become_user: "{{ homeassistant_user }}"
+  become_user: '{{ homeassistant_user }}'
   command: '{{ homeassistant_install_dir }}/bin/hass --script check_config -c "{{ homeassistant_config_dir }}"'
   changed_when: false

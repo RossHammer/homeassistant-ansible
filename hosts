@@ -1,2 +1,2 @@
-[home-assistant]
+[home_assistant]
 rosshammer.com ansible_user=pi ansible_become=true

@@ -31,7 +31,8 @@ mqtt:
 # logger:
 #   default: debug
 updater:
-# discovery:
+discovery:
+mobile_app:
 conversation:
 recorder:
   purge_keep_days: 60
@@ -54,7 +55,8 @@ neato:
   password: !secret neato_password
 google_assistant:
   project_id: home-assistant-68df3
-  api_key: AIzaSyCKZokgAcLanx0cVbrSbSAKP0dAdl6NzPg
+  service_account: !include service-account.json
+  report_state: true
   expose_by_default: false
   entity_config:
     switch.desk_light:

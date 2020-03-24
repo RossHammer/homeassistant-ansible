@@ -64,52 +64,52 @@
     - service: homeassistant.turn_off
       data:
         entity_id: switch.entrance_light
-- id: D9B68172-2FA9-4B48-8B1C-48EAB794A247
-  alias: Bedtime christmas tree
-  trigger:
-    platform: time
-    at: '23:00:00'
-  action:
-    - service: homeassistant.turn_off
-      data:
-        entity_id: switch.christmas_tree
-- id: 071EFE34-44CD-4FA4-AC57-DFD8E1471C4F
-  alias: Welcome christmas tree
-  trigger:
-    platform: state
-    entity_id: switch.entrance_light
-    to: 'on'
-  condition:
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
-    - condition: time
-      after: '12:00:00'
-      before: '22:30:00'
-  action:
-    - service: homeassistant.turn_on
-      data:
-        entity_id: switch.christmas_tree
-- id: 68C4BEB7-4D86-437E-9AFF-5A63141523E3
-  alias: Sunset christmas tree
-  trigger:
-    platform: sun
-    event: sunset
-  condition:
-    condition: state
-    entity_id: person.ross
-    state: home
-  action:
-    - service: homeassistant.turn_on
-      data:
-        entity_id: switch.christmas_tree
-- id: BFB17693-72C2-43DE-8D51-399F91362B66
-  alias: Goodbye christmas tree
-  trigger:
-    platform: state
-    entity_id: person.ross
-    from: home
-  action:
-    - service: homeassistant.turn_off
-      data:
-        entity_id: switch.christmas_tree
+# - id: D9B68172-2FA9-4B48-8B1C-48EAB794A247
+#   alias: Bedtime christmas tree
+#   trigger:
+#     platform: time
+#     at: '23:00:00'
+#   action:
+#     - service: homeassistant.turn_off
+#       data:
+#         entity_id: switch.christmas_tree
+# - id: 071EFE34-44CD-4FA4-AC57-DFD8E1471C4F
+#   alias: Welcome christmas tree
+#   trigger:
+#     platform: state
+#     entity_id: switch.entrance_light
+#     to: 'on'
+#   condition:
+#     - condition: state
+#       entity_id: sun.sun
+#       state: below_horizon
+#     - condition: time
+#       after: '12:00:00'
+#       before: '22:30:00'
+#   action:
+#     - service: homeassistant.turn_on
+#       data:
+#         entity_id: switch.christmas_tree
+# - id: 68C4BEB7-4D86-437E-9AFF-5A63141523E3
+#   alias: Sunset christmas tree
+#   trigger:
+#     platform: sun
+#     event: sunset
+#   condition:
+#     condition: state
+#     entity_id: person.ross
+#     state: home
+#   action:
+#     - service: homeassistant.turn_on
+#       data:
+#         entity_id: switch.christmas_tree
+# - id: BFB17693-72C2-43DE-8D51-399F91362B66
+#   alias: Goodbye christmas tree
+#   trigger:
+#     platform: state
+#     entity_id: person.ross
+#     from: home
+#   action:
+#     - service: homeassistant.turn_off
+#       data:
+#         entity_id: switch.christmas_tree
